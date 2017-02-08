@@ -40,8 +40,8 @@ CREATE TABLE reservations{
 	FOREIGN KEY (movie_name, day) REFERENCES showings(movie_name,day),
 	UNIQUE (username, movie_name, day)
 };
-
-INSERT INTO users (username, address, telephone) VALUES
+-- våra användare har namn också
+INSERT INTO users (username, name, address, telephone) VALUES
 ('BruceWayne','Bruce', null, '0 123 456'),
 ('ClarkKent', 'Clark', null, '0 234 567'),
 ('JessicaJones', 'Jessica', null, '1 345 678'),
