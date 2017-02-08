@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<h1 id="lab-2-database-design">Lab 2 — Database Design</h1>
+<p><em>Objective</em>: you will learn to design and to implement a database. This involves creating an E/R model for the application and converting the model into a relational model. You will also learn to create SQL tables and to insert data into the tables. During lab 3 you will develop a Java interface to the database.</p>
+<h2 id="background">Background</h2>
+<p>A database contains information about ticket reservations for movie performances. To make a reservation you must be registered as a user of the system. In order to register you choose a unique username and enter your name, address, and telephone number (the address is optional). When you use the system later, you just have to enter your username.</p>
+<p>In the system, a number of theaters show movies. Each theater has a name and a number of (unnumbered) seats. A movie is described by its name only. (In a real system you would, of course, store more information, such as actor biographies, poster images, video clips, etc.)</p>
+<p>A movie may be shown several times, but then during different days. This means that each movie is shown at most once on any day.</p>
+<p>You can only reserve one ticket at a time to a performance (if you want several tickets for the same performance you must make several separate reservations) and cannot reserve more tickets than are available at a performance. When you make a reservation you receive a reservation number which you will use when you pick up the ticket.</p>
+<h2 id="assignments">Assignments</h2>
+<ol style="list-style-type: decimal">
+<li><p>Develop an E/R model for the database described above, start by finding suitable entity sets.</p></li>
+<li><p>Find relationships between the entity sets. Indicate the multiplicities of the relationships.</p></li>
+<li><p>Find attributes of the entity sets and (possibly) of the relationships. Consider which of the attributes may be used as keys for the entity sets. Draw a UML diagram of your model.</p></li>
+<li><p>Convert the E/R model to a relational model. Use the method which has been described during the lectures and in the textbook.</p>
+<p>Describe your model on the form:</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql">   relation1(<span class="kw">attribute</span>, . . . ),
+   relation2(<span class="kw">attribute</span>, . . . ).</code></pre></div>
+<p>Identify primary keys and foreign keys.</p>
+<p>About primary keys: a movie name and a date together suffice to identify a movie performance, since each movie is shown at most once on one day. This means that <code>(movie name, date)</code> is a key of the relation which describes performances. If you convert the E/R model according to the rules, it may happen that the key also contains the name of the theater. (That the name of the theater should not be a part of the key is indicated by the functional dependency <code>(movie name, date → theater name)</code>, which means that you can deduce the theater name if you know the movie name and the date. We will discuss functional dependencies later in the course.)</p>
+<p>Additionally, relations must be normalized to avoid redundancy and anomalies in the database. We omit normalization for now, since we haven’t discussed it yet. (Also, relations usually are reasonably normalized if you start with a good E/R model.)</p></li>
+<li><p>Write SQL statements for the following tasks, put them in a <code>.sql</code>-script (e.g., <code>lab2.sql</code>):</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Create the tables. Don’t forget primary keys and foreign keys. Insert data into the tables. Invent your own data with real-world movie names and theater names. Use the data type <code>date</code> for dates. Dates are entered and displayed on the form <code>'2017–01–24'</code>.</p>
+<p>Let <code>sqlite3</code> execute the statements in your script by running the command</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ex">sqlite3</span> lab2.db <span class="op">&lt;</span> lab2.sql</code></pre></div>
+<p>in a Command Line Interpreter (CLI).</p>
+<p>It will create a database in the file <code>lab2.db</code>, and you can import it into a Jupyter notebook as in the attached <code>.ipynb</code>-file (<code>lab2.ipynb</code>).</p>
+<p>Your script should have the following structure:</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-- Delete the tables if they exist.</span>
+<span class="co">-- Disable foreign key checks, so the tables can </span>
+<span class="co">-- be dropped in arbitrary order.</span>
+PRAGMA foreign_keys=OFF;
+<span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="kw">IF</span> <span class="kw">EXISTS</span> users;
+...
+PRAGMA foreign_keys=ON;
+
+<span class="co">-- Create the tables.</span>
+<span class="kw">CREATE</span> <span class="kw">TABLE</span> users (
+  ...
+);
+...
+
+<span class="co">-- Insert data into the tables.</span>
+<span class="kw">INSERT</span> 
+<span class="kw">INTO</span>    users (...) 
+<span class="kw">VALUES</span>  (...);
+...</code></pre></div></li>
+<li><p>List all movies which are shown, list dates when a movie is shown, list all data concerning a movie performance.</p></li>
+<li><p>Create a reservation. Advice: unique reservation numbers can be created automatically in SQLite by specifying the <code>nbr</code> column as an <code>integer</code> which is also <code>a primary key</code>, like this:</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">CREATE</span> <span class="kw">TABLE</span> reservations (
+  nbr    <span class="dt">integer</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,
+  ...
+);</code></pre></div>
+<p>or this:</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">CREATE</span> <span class="kw">TABLE</span> reservations (
+  nbr    <span class="dt">integer</span>,
+  ...
+  <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (nbr)
+);</code></pre></div>
+<p>When you insert rows into the table and don’t give a value for <code>nbr</code> (or specify it as 0 or null), it will be assigned an unused integer value (normally it uses consecutive integers starting from 1).</p>
+<p>When a ticket is reserved, a new row must be inserted into the reservation table, and the number of available seats for the performance must be updated. Before you do this you have to check that there are seats available for the performance. It is not easy to check this in pure SQL, so we save this for lab 3 when we write a graphical user interface to the database. Then, we code in Java and can use if statements.</p></li>
+</ol></li>
+<li><p>Check that the key constraints that you have stated work as intended. Try to (you can do this in the attached notebook):</p>
+<ul>
+<li>insert two movie theaters with the same name,</li>
+<li>insert two performances of the same movie on the same date,</li>
+<li>insert a performance where the theater doesn’t exist in the database,</li>
+<li>insert a ticket reservation where either the user or the performance doesn’t exist (observe that SQLite doesn't check foreign key constraints by default, you have to explicitly tell it to -- see the attached notebook for more information),</li>
+<li>...</li>
+</ul></li>
+<li><p>Consider the following problem: when you make a ticket reservation you first check that seats are available for the performance, then you create a reservation, then update the number of available seats. Which problems can arise if several users do this simultaneously?</p></li>
+</ol>
+</body>
+</html>
