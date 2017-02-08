@@ -42,13 +42,13 @@ CREATE TABLE reservations{
 };
 
 INSERT INTO users (username, address, telephone) VALUES
-('BruceWayne', null, '0 123 456'),
-('ClarkKent', null, '0 234 567'),
-('JessicaJones', null, '1 345 678'),
-('DianaPrince', null, '1 234 567'),
-('ArthurCurry', null, '1 234 567'),
-('LukeSkywalker', null, '1 234 567'),
-('LeiaOrgana', null, '1 234 567');
+('BruceWayne','Bruce', null, '0 123 456'),
+('ClarkKent', 'Clark', null, '0 234 567'),
+('JessicaJones', 'Jessica', null, '1 345 678'),
+('DianaPrince', 'Diana', null, '1 234 567'),
+('ArthurCurry', 'Arthur', null, '1 234 567'),
+('LukeSkywalker', 'Luke', null, '1 234 567'),
+('LeiaOrgana', 'Leia', null, '1 234 567');
 
 INSERT INTO theaters (name, seats) VALUES
 ('Malmö', 350),
