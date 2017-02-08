@@ -11,6 +11,7 @@ PRAGMA foreign_keys=ON;
 -- create the tables
 CREATE TABLE users{
 	username varchar(20) PRIMARY KEY,
+	name varchar(20),
 	address varchar(40),
 	telephone varchar(10) NOT NULL
 };
