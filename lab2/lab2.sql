@@ -9,37 +9,37 @@ DROP TABLE IF EXISTS reservations;
 PRAGMA foreign_keys=ON;
 
 -- create the tables
-CREATE TABLE users{
+CREATE TABLE users (
 	username varchar(20) PRIMARY KEY,
 	name varchar(20),
 	address varchar(40),
 	telephone varchar(10) NOT NULL
-};
+);
 
-CREATE TABLE theaters{
+CREATE TABLE theaters (
 	name varchar(20) PRIMARY KEY,
 	seats integer NOT NULL
-};
+);
 
-CREATE TABLE movies{
+CREATE TABLE movies (
 	name varchar(30) PRIMARY KEY
-};
+);
 
-CREATE TABLE showings{
+CREATE TABLE showings (
 	movie_name varchar(30) REFERENCES movies(name),
 	theater_name varchar(20) REFERENCES theaters(name),
 	day date,
 	PRIMARY KEY(movie_name, day)
-};
+);
 
-CREATE TABLE reservations{
+CREATE TABLE reservations (
 	nbr integer PRIMARY KEY,
 	username varchar(20) REFERENCES users(username),
 	movie_name varchar(30),
 	day date,
 	FOREIGN KEY (movie_name, day) REFERENCES showings(movie_name,day),
 	UNIQUE (username, movie_name, day)
-};
+);
 -- våra användare har namn också
 INSERT INTO users (username, name, address, telephone) VALUES
 ('BruceWayne','Bruce', null, '0 123 456'),
@@ -65,7 +65,7 @@ INSERT INTO movies (name) VALUES
 ('Spiderman: Homecoming'),
 ('La la land'),
 ('Justice League'),
-('LEGO: Batman'),
+('LEGO: Batman');
 
 INSERT INTO showings (movie_name, theater_name, day) VALUES
 ('Logan', 'Malmö', '2017-03-01'),
