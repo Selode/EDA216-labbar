@@ -4,7 +4,7 @@ PRAGMA foreign_keys=OFF;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS theaters;
 DROP TABLE IF EXISTS movies;
-DROP TABLE IF EXISTS showings;
+DROP TABLE IF EXISTS performances;
 DROP TABLE IF EXISTS reservations;
 PRAGMA foreign_keys=ON;
 
@@ -25,7 +25,7 @@ CREATE TABLE movies (
 	name varchar(30) PRIMARY KEY
 );
 
-CREATE TABLE showings (
+CREATE TABLE performances (
 	movie_name varchar(30) REFERENCES movies(name),
 	theater_name varchar(20) REFERENCES theaters(name),
 	day date,
@@ -37,7 +37,7 @@ CREATE TABLE reservations (
 	username varchar(20) REFERENCES users(username),
 	movie_name varchar(30),
 	day date,
-	FOREIGN KEY (movie_name, day) REFERENCES showings(movie_name,day),
+	FOREIGN KEY (movie_name, day) REFERENCES performances(movie_name,day),
 	UNIQUE (username, movie_name, day)
 );
 -- våra användare har namn också
@@ -67,7 +67,7 @@ INSERT INTO movies (name) VALUES
 ('Justice League'),
 ('LEGO: Batman');
 
-INSERT INTO showings (movie_name, theater_name, day) VALUES
+INSERT INTO performances (movie_name, theater_name, day) VALUES
 ('Logan', 'Malmö', '2017-03-01'),
 ('Logan', 'Lund', '2017-03-02'),
 ('Logan', 'Helsingborg', '2017-03-03');
@@ -79,8 +79,8 @@ INSERT INTO reservations (username, movie_name, day) VALUES
 SELECT "1) SELECT * FROM movies";
 SELECT * FROM movies;
 
-SELECT "2) SELECT day FROM showings WHERE movie_name = 'Logan'";
-SELECT day FROM showings WHERE movie_name = 'Logan';
+SELECT "2) SELECT day FROM performances WHERE movie_name = 'Logan'";
+SELECT day FROM performances WHERE movie_name = 'Logan';
 
 SELECT "SELECT nbr, username FROM reservations WHERE movie_name = 'Logan' AND day = '2017-03-01';";
-SELECT nbr, username FROM reservations WHERE movie_name = 'Logan' AND day = '2017-03-04';
+SELECT nbr, username FROM reservations WHERE movie_name = 'Logan' AND day = '2017-03-01';
