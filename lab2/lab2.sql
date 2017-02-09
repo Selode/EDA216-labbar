@@ -29,7 +29,8 @@ CREATE TABLE performances (
 	movie_name varchar(30) REFERENCES movies(name),
 	theater_name varchar(20) REFERENCES theaters(name),
 	day date,
-	PRIMARY KEY(movie_name, day)
+	--- free seats
+	PRIMARY KEY(movie_name, day) 
 );
 
 CREATE TABLE reservations (
