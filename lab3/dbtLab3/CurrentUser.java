@@ -1,4 +1,5 @@
 package dbtLab3;
+import app.Database;
 
 /**
  * CurrentUser represents the current user that has logged on to

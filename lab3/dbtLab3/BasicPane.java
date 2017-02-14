@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 import java.awt.*;
+import app.Database;
 
 /**
  * BasicPane is a pane in the user interface. It consists of two subpanels:
@@ -55,6 +56,7 @@ public class BasicPane extends JPanel {
         rightPanel.add(middlePanel, BorderLayout.CENTER);
         rightPanel.add(bottomPanel, BorderLayout.SOUTH);
         add(rightPanel, BorderLayout.CENTER);
+         
     }
         
     /** 

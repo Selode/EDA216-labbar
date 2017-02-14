@@ -3,6 +3,7 @@ package dbtLab3;
 import javax.swing.*;
 
 import java.awt.*;
+import app.Database;
 
 /**
  * A GUI panel which contains a number of text fields on top of each other. Each

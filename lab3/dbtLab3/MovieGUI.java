@@ -5,6 +5,7 @@ import javax.swing.event.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import app.Database;
 
 /**
  * MovieGUI is the user interface to the movie database. It sets up the main
@@ -56,7 +57,7 @@ public class MovieGUI {
                 
         /* --- change code here --- */
         /* --- change xxx to your user name, yyy to your password --- */
-        if (db.openConnection("xxx", "yyy")) {
+        if (db.openConnection("db")) {
             userLoginPane.displayMessage("Connected to database");
         } else {
             userLoginPane.displayMessage("Could not connect to database");
@@ -72,7 +73,7 @@ public class MovieGUI {
          * pane are performed.
          * 
          * @param e
-         *            The change event (not used).
+         *            The change event (not used).java -cp .:../sqlite-jdbc.jar MovieBooking
          */
         public void stateChanged(ChangeEvent e) {
             BasicPane selectedPane = (BasicPane) tabbedPane

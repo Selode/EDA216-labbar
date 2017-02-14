@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import app.Database;
 
 /**
  * A GUI panel which contains buttons and a message line.

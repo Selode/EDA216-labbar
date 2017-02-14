@@ -5,6 +5,7 @@ import javax.swing.event.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import app.*;
 
 /**
  * The GUI pane where a user books tickets for movie performances. It contains
@@ -175,6 +176,11 @@ public class BookingPane extends BasicPane {
     private void fillNameList() {
         nameListModel.removeAllElements();
         /* --- insert own code here --- */
+        Collection<String> movies = db.getMovies();
+
+        for(String movie : movies){
+            nameListModel.addElement(movie);
+        }
     }
 
     /**
@@ -184,6 +190,12 @@ public class BookingPane extends BasicPane {
     private void fillDateList() {
         dateListModel.removeAllElements();
         /* --- insert own code here --- */
+        Collection<Map<String, String>> performances;
+
+        performances = db.getPerformances(movieName);
+        for(Map<String, String> performance : performances) {
+            dateListModel.addElement(performance.get("day"));
+        }
     }
 
     /**
@@ -213,6 +225,7 @@ public class BookingPane extends BasicPane {
             }
             String movieName = nameList.getSelectedValue();
             /* --- insert own code here --- */
+            fillDateList(movieName);
         }
     }
 
@@ -235,6 +248,12 @@ public class BookingPane extends BasicPane {
             String movieName = nameList.getSelectedValue();
             String date = dateList.getSelectedValue();
             /* --- insert own code here --- */
+            Map<String, String> performanceData = db.getPerformanceData(movieName, date);
+            performanceData.get("movie_name");
+            fields[MOVIE_NAME].setText(performanceData.get("movie_name"));
+            fields[PERF_DATE].setText(performanceData.get("day"));
+            fields[THEATER_NAME].setText(performanceData.get("theater_name"));
+            fields[FREE_SEATS].setText(performanceData.get("free_seats"));
         }
     }
 
