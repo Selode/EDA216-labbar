@@ -15,6 +15,7 @@ public class Database {
      * The database connection.
      */
     private Connection conn;
+    private PreparedStatement login;
 
     /**
      * Create the database interface object. Connection to the
@@ -113,6 +114,39 @@ public class Database {
             }
         }
     }
+
+    public Collection<Map<String, String>> getPerformances(String movieName) {
+        PreparedStatement ps = null;
+        ArrayList<Map<String, String>> performances = new ArrayList<Map<String, String>>();
+        
+        try {
+            String sql = "SELECT day, movie_name, theater_name FROM performances WHERE movie_name = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, movieName);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                Map<String, String> performance = new HashMap<String, String>(3);
+                performance.put("day", rs.getString("day"));
+                performance.put("movie_name", rs.getString("movie_name"));
+                performance.put("theater_name", rs.getString("theater_name"));
+                
+                performances.add(performance);
+            }
+
+            return performances;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
     public Map<String, String> getPerformanceData(String movieName, String date) {
         PreparedStatement ps = null;
         Map<String, String> performance = new HashMap<String, String>(4);
@@ -157,7 +191,7 @@ public class Database {
             String sql = "INSERT INTO reservations(username, day, movie_name) VALUES (?, ?, ?)";
             ps = conn.prepareStatement(sql);
             ps.setString(1, CurrentUser.instance().getCurrentUserId());
-            ps.setString(2, day);
+            ps.setString(2, date);
             ps.setString(3, movieName);
             ps.executeUpdate();
             ps.close();

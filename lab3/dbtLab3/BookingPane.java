@@ -6,6 +6,7 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 import app.*;
+import java.util.*;
 
 /**
  * The GUI pane where a user books tickets for movie performances. It contains
@@ -182,21 +183,19 @@ public class BookingPane extends BasicPane {
             nameListModel.addElement(movie);
         }
     }
-
     /**
-     * Fetch performance dates from the database and display them in the date
-     * list.
-     */
-    private void fillDateList() {
+    * Fetch performance dates from the database and display them in the date
+    * list.
+    */
+    private void fillDateList(String movieName) {
         dateListModel.removeAllElements();
-        /* --- insert own code here --- */
         Collection<Map<String, String>> performances;
-
+        
         performances = db.getPerformances(movieName);
         for(Map<String, String> performance : performances) {
             dateListModel.addElement(performance.get("day"));
         }
-    }
+    }    
 
     /**
      * Clear all text fields.
