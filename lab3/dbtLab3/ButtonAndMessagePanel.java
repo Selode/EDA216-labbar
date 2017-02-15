@@ -1,10 +1,10 @@
-package dbtLab3;
+//package dbtLab3;
 
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import app.Database;
+//import app.Database;
 
 /**
  * A GUI panel which contains buttons and a message line.

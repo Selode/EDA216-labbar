@@ -1,8 +1,8 @@
-package dbtLab3;
+//package dbtLab3;
 
 import javax.swing.*;
 import java.awt.event.*;
-import app.Database;
+//import app.Database;
 
 /**
  * The GUI pane where a new user logs in. Contains a text field where the user

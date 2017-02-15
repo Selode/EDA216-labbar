@@ -1,11 +1,11 @@
-package dbtLab3;
+//package dbtLab3;
 
 import javax.swing.*;
 import javax.swing.event.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import app.Database;
+//import app.Database;
 
 /**
  * MovieGUI is the user interface to the movie database. It sets up the main
@@ -57,7 +57,7 @@ public class MovieGUI {
                 
         /* --- change code here --- */
         /* --- change xxx to your user name, yyy to your password --- */
-        if (db.openConnection("db")) {
+        if (db.openConnection("lab2.db")) {
             userLoginPane.displayMessage("Connected to database");
         } else {
             userLoginPane.displayMessage("Could not connect to database");
