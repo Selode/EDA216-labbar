@@ -279,6 +279,7 @@ public class BookingPane extends BasicPane {
             String movieName = nameList.getSelectedValue();
             String date = dateList.getSelectedValue();
             /* --- insert own code here --- */
+            db.bookTicket(movieName, date);
         }
     }
 }
