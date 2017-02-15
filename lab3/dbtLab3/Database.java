@@ -161,7 +161,8 @@ public class Database {
             if(rs.next()) {
                 performance.put("day", rs.getString("day"));
                 performance.put("movie_name", rs.getString("movie_name"));
-                performance.put("theater_name", rs.getString("free_seats"));
+                performance.put("theater_name", rs.getString("theater_name"));
+                performance.put("free_seats", rs.getString("free_seats"));
 
                 return performance;
             }
@@ -185,7 +186,6 @@ public class Database {
         ArrayList<Map<String, String>> performances = new ArrayList<Map<String, String>>();
 
         try {
-            //atomic
             conn.setAutoCommit(false);
 
             String sql = "INSERT INTO reservations(username, day, movie_name) VALUES (?, ?, ?)";
